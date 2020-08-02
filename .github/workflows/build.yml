@@ -13,7 +13,8 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: 'edtan/sandbox'
-          ref: 'refs/heads/master'
+          # TODO: fix ref so that it also works with workflow_dispatch
+          ref: ${{ github.event.client_payload.branch }}
 
       - name: "Run code"
         run: python app-code/main.py
