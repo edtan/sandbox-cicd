@@ -29,6 +29,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          repository: edtan/sandbox-cicd
+          repository: edtan/sandbox-cicd/sandbox
           tags: ${{ steps.set-version.outputs.version }}
           path: app-code
