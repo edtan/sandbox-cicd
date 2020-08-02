@@ -12,8 +12,8 @@ jobs:
     steps:
       - name: Print repository_dispatch payload
         run: |
-          print ${{ toJson(github.event.client_payload) }}
-          
+          echo "${{ toJson(github.event.client_payload) }}"
+
       - uses: actions/checkout@v2
         with:
           repository: 'edtan/sandbox'
