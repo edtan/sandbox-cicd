@@ -8,7 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Print repository_dispatch payload
+      - name: "repo_dispatch_params|${{ github.event.client_payload.repository_full_name }}|${{ github.event.client_payload.head_commit_sha }}|${{ github.event.client_payload.branch }}"
         run: |
           echo "${{ toJson(github.event.client_payload) }}"
 
