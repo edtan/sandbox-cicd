@@ -23,10 +23,6 @@ jobs:
         run: |
           echo "::set-output name=version::$(cat version)"
 
-      - name: Dynamic name test ${{ steps.set-version.outputs.version }}
-        run: |
-          echo "${{ toJson(github.event.client_payload) }}"
-
       - name: Build and push Docker image
         uses: docker/build-push-action@v1
         with:
