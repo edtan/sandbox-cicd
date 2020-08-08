@@ -21,9 +21,9 @@ jobs:
         id: set-version
         working-directory: app-code
         run: |
-          echo "test"
+          echo "::set-output name=version::$(cat version)"
 
-      - name: Dynamic name test  ${{ steps.set-version.outputs.version }}
+      - name: Dynamic name test ${{ steps.set-version.outputs.version }}
         run: |
           echo "${{ toJson(github.event.client_payload) }}"
 
