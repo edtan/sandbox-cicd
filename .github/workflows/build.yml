@@ -17,13 +17,13 @@ jobs:
           repository: ${{ github.event.client_payload.repository_full_name }}
           ref: ${{ github.event.client_payload.head_commit_sha }}
 
-      - name: Set version ${{ steps.set-version.outputs.version }}
+      - name: Set version
         id: set-version
         working-directory: app-code
         run: |
           echo "test"
 
-      - name: Dynamic name test 
+      - name: Dynamic name test  ${{ steps.set-version.outputs.version }}
         run: |
           echo "${{ toJson(github.event.client_payload) }}"
 
