@@ -32,3 +32,7 @@ jobs:
           repository: edtan/sandbox-cicd/sandbox
           tags: ${{ github.event.client_payload.branch }}-${{ steps.set-version.outputs.version }}
           path: app-code
+
+      - name: "workflow_output|MICRO|${{ steps.set-version.outputs.version }}"
+        run: |
+          echo ''
