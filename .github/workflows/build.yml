@@ -19,6 +19,7 @@ jobs:
 
       - name: Set version
         id: set-version
+        working-directory: app-code
         run: |
           echo "::set-output name=version::$(cat version)"
 
@@ -30,6 +31,7 @@ jobs:
           registry: docker.pkg.github.com
           repository: edtan/sandbox-cicd/sandbox
           tags: ${{ github.event.client_payload.branch }}-${{ steps.set-version.outputs.version }}
+          path: app-code
 
       - name: "workflow_output|MICRO|${{ steps.set-version.outputs.version }}|docker.pkg.github.com/edtan/sandbox-cicd/sandbox:${{ github.event.client_payload.branch }}-${{ steps.set-version.outputs.version }}"
         run: |
