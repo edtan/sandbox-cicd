@@ -8,7 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: "repo_dispatch_params|${{ github.event.client_payload.repository_full_name }}|${{ github.event.client_payload.head_commit_sha }}|${{ github.event.client_payload.branch }}"
+      - name: "repo_dispatch_params|${{ github.event.client_payload.repository_full_name }}|${{ github.event.client_payload.repository_subdirectory }}|${{ github.event.client_payload.head_commit_sha }}|${{ github.event.client_payload.branch }}"
         run: |
           echo "${{ toJson(github.event.client_payload) }}"
 
@@ -19,7 +19,7 @@ jobs:
 
       - name: Set version
         id: set-version
-        working-directory: app-code
+        working-directory: ${{ github.event.client_payload.repository_subdirectory }}
         run: |
           echo "::set-output name=version::$(cat version)"
 
@@ -31,8 +31,8 @@ jobs:
           registry: docker.pkg.github.com
           repository: edtan/sandbox-cicd/sandbox
           tags: ${{ github.event.client_payload.branch }}-${{ steps.set-version.outputs.version }}
-          path: app-code
+          path: ${{ github.event.client_payload.repository_subdirectory }}
 
-      - name: "workflow_output|Microservice|${{ steps.set-version.outputs.version }}|docker.pkg.github.com/edtan/sandbox-cicd/sandbox:${{ github.event.client_payload.branch }}-${{ steps.set-version.outputs.version }}"
+      - name: "workflow_output|${{ steps.set-version.outputs.version }}|docker.pkg.github.com/edtan/sandbox-cicd/sandbox:${{ github.event.client_payload.branch }}-${{ steps.set-version.outputs.version }}"
         run: |
           echo ''
