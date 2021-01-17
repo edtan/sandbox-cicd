@@ -10,5 +10,5 @@ jobs:
        run: echo "This does not run"
 
      - name: "bad expression, and act evaluates it and detects a bad expression "
-       if: ${{ foobar2 }}
+       if: foobar2
        run: echo "act will error before reaching this part"
