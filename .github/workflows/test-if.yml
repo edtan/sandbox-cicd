@@ -1,0 +1,14 @@
+name: "Test if statements"
+on: workflow_dispatch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+     - name: "bad expression, but act does not evaluate it and skips this step"
+       if: foobar1
+       run: echo "This does not run"
+
+     - name: "bad expression, and act evaluates it and detects a bad expression "
+       if: ${{ foobar2 }}
+       run: echo "act will error before reaching this part"
