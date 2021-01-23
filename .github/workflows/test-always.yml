@@ -1,0 +1,13 @@
+name: "Test always"
+on: workflow_dispatch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+     - name: "simulate an error"
+       run: exit 1
+
+     - name: "see if this will run on previous error"
+       if: always()
+       run: echo "Checking if always runs..."
